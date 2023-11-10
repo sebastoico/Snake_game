@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    private Vector2 _direction = Vector2.right;
+    private Vector2 _direction = Vector2.zero;
     private List<Transform> _segments = new List<Transform>();
     public Transform segmentPrefab;
     public int initalSize = 4;
@@ -18,21 +18,27 @@ public class Snake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (_direction == Vector2.left || _direction == Vector2.right || _direction == Vector2.zero)
         {
-            _direction = Vector2.up;
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                _direction = Vector2.up;
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                _direction = Vector2.down;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        if (_direction == Vector2.up || _direction == Vector2.down || _direction == Vector2.zero)
         {
-            _direction = Vector2.down;
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            _direction = Vector2.left;
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            _direction = Vector2.right;
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                _direction = Vector2.left;
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                _direction = Vector2.right;
+            }
         }
     }
 
@@ -72,6 +78,7 @@ public class Snake : MonoBehaviour
         }
 
         this.transform.position = Vector3.zero;
+        _direction = Vector2.zero;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
