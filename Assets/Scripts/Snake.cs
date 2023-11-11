@@ -10,7 +10,7 @@ public class Snake : MonoBehaviour
     [SerializeField] private GameObject gameOverMenu;
 
     public Text scoreText;
-    public int scoreCount;
+    internal int score;
 
     private Vector2 _direction = Vector2.zero;
     private List<Transform> _segments = new List<Transform>();
@@ -88,18 +88,21 @@ public class Snake : MonoBehaviour
 
         this.transform.position = new Vector3(0,2,0);
         _direction = Vector2.zero;
+
+        score = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Food")
         {
+            score += 1;
             Grow();
-            scoreText.text = "Score: " + (_segments.Count - initalSize - 1);
+            scoreText.text = "Score: " + score;
         }
         else if (other.tag == "Obstacle" && _direction != Vector2.zero)
         {
-            ResetState();
+            _direction = Vector2.zero;
             gameOverMenu.SetActive(true);
         }
     }
