@@ -2,10 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class Snake : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverMenu;
+
+    public Text scoreText;
+    public int scoreCount;
+
     private Vector2 _direction = Vector2.zero;
     private List<Transform> _segments = new List<Transform>();
     public Transform segmentPrefab;
@@ -80,7 +86,7 @@ public class Snake : MonoBehaviour
             _segments.Add(Instantiate(this.segmentPrefab));
         }
 
-        this.transform.position = Vector3.zero;
+        this.transform.position = new Vector3(0,2,0);
         _direction = Vector2.zero;
     }
 
@@ -89,6 +95,7 @@ public class Snake : MonoBehaviour
         if (other.tag == "Food")
         {
             Grow();
+            scoreText.text = "Score: " + (_segments.Count - initalSize - 1);
         }
         else if (other.tag == "Obstacle" && _direction != Vector2.zero)
         {
