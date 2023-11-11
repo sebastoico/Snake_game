@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverMenu;
     private Vector2 _direction = Vector2.zero;
     private List<Transform> _segments = new List<Transform>();
     public Transform segmentPrefab;
@@ -13,6 +15,7 @@ public class Snake : MonoBehaviour
     void Start()
     {
         ResetState();
+        gameOverMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -87,9 +90,10 @@ public class Snake : MonoBehaviour
         {
             Grow();
         }
-        else if (other.tag == "Obstacle")
+        else if (other.tag == "Obstacle" && _direction != Vector2.zero)
         {
             ResetState();
+            gameOverMenu.SetActive(true);
         }
     }
 }
