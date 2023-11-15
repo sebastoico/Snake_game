@@ -7,13 +7,14 @@ using UnityEngine.UI;
 
 public class Snake : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField]
+    private GameObject gameOverMenu;
 
     public Text scoreText;
     internal int score;
 
     private Vector2 _direction = Vector2.zero;
-    private List<Transform> _segments = new List<Transform>();
+    internal List<Transform> _segments = new List<Transform>();
     public Transform segmentPrefab;
     public int initalSize = 4;
 
@@ -29,22 +30,22 @@ public class Snake : MonoBehaviour
     {
         if (_direction == Vector2.left || _direction == Vector2.right || _direction == Vector2.zero)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 _direction = Vector2.up;
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 _direction = Vector2.down;
             }
         }
         if (_direction == Vector2.up || _direction == Vector2.down || _direction == Vector2.zero)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 _direction = Vector2.left;
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 _direction = Vector2.right;
             }
@@ -86,7 +87,7 @@ public class Snake : MonoBehaviour
             _segments.Add(Instantiate(this.segmentPrefab));
         }
 
-        this.transform.position = new Vector3(0,2,0);
+        this.transform.position = new Vector3(0, 2, 0);
         _direction = Vector2.zero;
 
         score = 0;

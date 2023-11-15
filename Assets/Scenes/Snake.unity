@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &297528023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -803,6 +803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridArea: {fileID: 688390740}
+  snake: {fileID: 1925251044}
 --- !u!1 &998341164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1703,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverMenu: {fileID: 297528022}
   scoreText: {fileID: 720412195}
-  score: 0
   segmentPrefab: {fileID: 7104856262636323215, guid: 6c448e0a7abde89468278b8c1f5472d2, type: 3}
   initalSize: 4
 --- !u!1 &2114434218
